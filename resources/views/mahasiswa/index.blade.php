@@ -6,7 +6,7 @@
         <th>Nama</th>
         <th>Jenis Kelamin</th>
         <th>Alamat</th>
-        <th>
+        <th>Aksi</th>
     </tr>
     @foreach($mahasiswa as $mhs)
     <tr>
@@ -15,6 +15,14 @@
         <td>{{$mhs->nama}}</td>
         <td>{{$mhs->jenis_kelamin}}</td>
         <td>{{$mhs->alamat}}</td>
+        <td>
+            <a href="/mahasiswa/{{$mhs->id}}/edit">Edit</a>
+            <form action="/mahasiswa/{{$mhs->id}}" method="POST">
+                @method('delete')
+                @csrf
+                <input type="submit" value="Delete">
+            </form>
+            </td>
     </tr>
     @endforeach
 </table>

@@ -20,4 +20,22 @@ class MahasiswaController extends Controller
         Mahasiswa::create($request->except(['_token','submit']));
         return redirect('/mahasiswa');
     }
+    public function edit($id){
+        // dd($id);
+        $mahasiswa = Mahasiswa::find($id);
+        // dd($mahasiswa);
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    public function update($id, Request $request){
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->update($request->except(['_token','submit']));
+        return redirect('/mahasiswa');
+    }
+
+    public function destory($id){
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->delete();
+        return redirect('/mahasiswa');
+    }
 }
