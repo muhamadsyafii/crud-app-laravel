@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MahasiswaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
-Route::get('/mahasiswa/create', [MahasiswaController::class, 'create']);
-Route::post('/mahasiswa/store', [MahasiswaController::class, 'store']);
-Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
-Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update']);
-Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destory']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [MahasiswaController::class, 'index']);
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
+    Route::get('/mahasiswa/create', [MahasiswaController::class, 'create']);
+    Route::post('/mahasiswa/store', [MahasiswaController::class, 'store']);
+    Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
+    Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update']);
+    Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destory']);
+});
+
+Auth::routes();
